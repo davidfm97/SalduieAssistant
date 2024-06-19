@@ -19,7 +19,7 @@ module.exports = {
 		if(rows.data.values.length > 0) {
 			for(let i = 1; i < rows.data.values.length; i++) {
 				const row = rows.data.values[i];
-				embed.addField(`Username: ${row[0]}`, `Reason: ${row[1]}`);
+				embed.addField(`Usuario: ${row[0]}`, `Especie: ${row[1]}`);
 			}
 		} else {
 			embed.setDescription("No users added to the list!");
