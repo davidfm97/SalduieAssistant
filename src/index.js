@@ -91,3 +91,9 @@ client.login(botToken).then(() => {
 	  )
 	);
 });
+// Manejo para apagar o detener el bot adecuadamente
+process.on('SIGINT', () => {
+    console.log('Shutting down...');
+    client.destroy();
+    process.exit(0);
+});

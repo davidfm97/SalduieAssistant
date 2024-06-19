@@ -34,7 +34,7 @@ module.exports = {
 				for(let i = 0; i < rows.data.values.length; i++) {
 					const row = rows.data.values[i];
 					if (row[0] === username) {
-						embed.setDescription(`Username: ${row[0]}\nReason: ${row[1]}`);
+						embed.setDescription(`Usuario: ${row[0]}\nSemilla: ${row[1]}`);
 					}
 				}
 
