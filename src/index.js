@@ -22,6 +22,7 @@ const credentials = {
 	universe_domain: process.env.UNIVERSE_DOMAIN
   };
 // Declaring our Discord Client
+const keep_alive = require('./keep_alive.js')
 const client = new Client({
 	allowedMentions: { parse: ["users", "roles"] },
 	intents: [
