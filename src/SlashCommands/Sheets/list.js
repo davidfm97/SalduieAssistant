@@ -17,7 +17,7 @@ module.exports = {
 		})
 
 		if(rows.data.values.length > 0) {
-			for(let i = 0; i < rows.data.values.length; i++) {
+			for(let i = 1; i < rows.data.values.length; i++) {
 				const row = rows.data.values[i];
 				embed.addField(`Username: ${row[0]}`, `Reason: ${row[1]}`);
 			}

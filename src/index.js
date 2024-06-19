@@ -1,11 +1,26 @@
 const chalk = require('chalk');
 const fs = require("fs");
+require('dotenv').config();
 const { google } = require('googleapis');
 const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
 const { loadEvents } = require("../src/handlers/loadEvents");
 const { loadSlashCommands } = require("../src/handlers/loadSlashCommands");
-const { botToken, spreadsheetId } = require("../src/jsons/config.json");
 
+const botToken = process.env.CLIENT_TOKEN;
+const spreadsheetId = process.env.SPREADSHEET_ID;
+const credentials = {
+	type: process.env.TYPE,
+	project_id: process.env.PROJECT_ID,
+	private_key_id: process.env.PRIVATE_KEY_ID,
+	private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+	client_email: process.env.CLIENT_EMAIL,
+	client_id: process.env.CLIENT_ID,
+	auth_uri: process.env.AUTH_URI,
+	token_uri: process.env.TOKEN_URI,
+	auth_provider_x509_cert_url: process.env.AUTH_PROVIDER_X509_CERT_URL,
+	client_x509_cert_url: process.env.CLIENT_X509_CERT_URL,
+	universe_domain: process.env.UNIVERSE_DOMAIN
+  };
 // Declaring our Discord Client
 const client = new Client({
 	allowedMentions: { parse: ["users", "roles"] },
@@ -21,12 +36,11 @@ const client = new Client({
 	  Intents.FLAGS.GUILD_PRESENCES,
 	],
 });
-
 // Google Sheets Authorisation Stuff
 const auth = new google.auth.GoogleAuth({
-	keyFile: "src/jsons/credentials.json",
+	credentials,
 	scopes: "https://www.googleapis.com/auth/spreadsheets"
-})
+  });
 const sheetClient = auth.getClient();
 const googleSheets = google.sheets({ version: "v4", auth: sheetClient });
 

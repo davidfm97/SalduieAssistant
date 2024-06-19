@@ -17,8 +17,8 @@ module.exports = {
 		}
 	],
 	run: async(client, interaction, args) => {
-		const user = await interaction.options.getUser("user");
-		const reason = await interaction.options.getString("reason");
+		const user = await interaction.options.getUser("Usuario");
+		const reason = await interaction.options.getString("Semilla");
 
 		const username = await user.username;
 
