@@ -4,14 +4,14 @@ module.exports = {
 	userPerms: ["ADMINISTRATOR"],
 	options: [
 		{
-			name: "user",
-			description: "The user to add to the spreadsheet",
+			name: "Usuario",
+			description: "El usuario poseedor de la semilla",
 			type: "USER",
 			required: true,
 		},
 		{
-			name: "reason",
-			description: "The reason for adding the user",
+			name: "Semilla",
+			description: "Especie de la semilla",
 			type: "STRING",
 			required: true,
 		}
