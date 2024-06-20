@@ -3,7 +3,6 @@ const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 module.exports = {
     name: "list",
     description: "Muestra todos los usuarios agregados a la lista de semillas!",
-    userPerms: ["ADMINISTRATOR"],
     options: [
         {
             name: 'filter',
@@ -14,12 +13,22 @@ module.exports = {
     ],
     run: async (client, interaction) => {
         const filterCriteria = interaction.options.getString('filter') || '';
+        const cultivadoresRoleId = '1246468778112323587'; // ID del rol de Cultivadores
+
+        // Verificar si el usuario tiene el rol de Cultivadores o es administrador
+        const member = interaction.guild.members.cache.get(interaction.user.id);
+        const isAdmin = member.permissions.has("ADMINISTRATOR");
+        const isCultivador = member.roles.cache.has(cultivadoresRoleId);
+
+        if (!isAdmin && !isCultivador) {
+            return interaction.reply("No tienes permisos para usar este comando. Necesitas ser Administrador o tener el rol de Cultivador.");
+        }
 
         try {
             const rows = await client.googleSheets.values.get({
                 auth: client.auth,
                 spreadsheetId: client.sheetId,
-                range: "Sheet1!A:H",
+                range: "Sheet1!A:I", // Ajustar el rango para incluir el campo 'type'
             });
 
             if (!rows.data.values || rows.data.values.length <= 1) {
@@ -53,14 +62,15 @@ module.exports = {
                 let fieldValue = '';
 
                 if (row[0]) fieldValue += `**Usuario**: ${row[0]}\n`;
-                if (row[1]) fieldValue += `**Semilla**: ${row[1]}\n`;
-                if (row[2]) fieldValue += `**Variedad**: ${row[2]}\n`;
-                if (row[3]) fieldValue += `**Nombre científico**: ${row[3]}\n`;
-                if (row[4]) fieldValue += `**Año de recolección**: ${row[4]}\n`;
-                if (row[5]) fieldValue += `**Lugar de recolección**: ${row[5]}\n`;
-                if (row[6]) fieldValue += `**Observaciones**: ${row[6]}\n`;
+                if (row[1]) fieldValue += `**Tipo**: ${row[1]}\n`; // Mostrar el tipo de entrada (type)
+                if (row[2]) fieldValue += `**Semilla**: ${row[2]}\n`;
+                if (row[3]) fieldValue += `**Variedad**: ${row[3]}\n`;
+                if (row[4]) fieldValue += `**Nombre científico**: ${row[4]}\n`;
+                if (row[5]) fieldValue += `**Año de recolección**: ${row[5]}\n`;
+                if (row[6]) fieldValue += `**Lugar de recolección**: ${row[6]}\n`;
+                if (row[7]) fieldValue += `**Observaciones**: ${row[7]}\n`;
 
-                const imageUrl = row[7]; // Asumiendo que la columna 7 contiene la URL de la imagen
+                const imageUrl = row[8]; // Asumiendo que la columna 8 contiene la URL de la imagen
                 if (imageUrl) {
                     fieldValue += `**Imagen**: ${imageUrl}\n`;
                 }

@@ -3,12 +3,33 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: "add",
     description: "Añade una entrada al banco de semillas con opción de imagen",
-    userPerms: ["ADMINISTRATOR"],
     options: [
         {
             name: "user",
             description: "El usuario a añadir al banco de semillas",
             type: "USER",
+            required: true,
+        },
+        {
+            name: "type",
+            description: "Tipo de entrada (semilla o esqueje)",
+            type: "STRING",
+            required: true,
+            choices: [
+                {
+                    name: "Semilla",
+                    value: "Semilla"
+                },
+                {
+                    name: "Esqueje",
+                    value: "Esqueje"
+                }
+            ]
+        },
+        {
+            name: "location",
+            description: "El lugar de recolección",
+            type: "STRING",
             required: true,
         },
         {
@@ -21,24 +42,18 @@ module.exports = {
             name: "variety",
             description: "La variedad de la semilla",
             type: "STRING",
-            required: true,
+            required: false,
         },
         {
             name: "scientific_name",
             description: "El nombre científico de la planta",
             type: "STRING",
-            required: true,
+            required: false,
         },
         {
             name: "harvest_year",
             description: "El año de recolección",
             type: "INTEGER",
-            required: true,
-        },
-        {
-            name: "location",
-            description: "El lugar de recolección",
-            type: "STRING",
             required: false,
         },
         {
@@ -56,7 +71,18 @@ module.exports = {
     ],
     run: async (client, interaction, args) => {
         try {
+            const member = interaction.member;
+
+            // Verificar si el usuario tiene el rol de "Cultivadores" o es administrador
+            const isAdmin = member.permissions.has("ADMINISTRATOR");
+            const isCultivador = member.roles.cache.has("1246468778112323587");
+
+            if (!isAdmin && !isCultivador) {
+                return interaction.reply("No tienes permiso para usar este comando. Necesitas ser Administrador o tener el rol de Cultivador.");
+            }
+
             const user = interaction.options.getUser("user");
+            const type = interaction.options.getString("type");
             const seed = interaction.options.getString("seed");
             const variety = interaction.options.getString("variety");
             const scientificName = interaction.options.getString("scientific_name");
@@ -67,31 +93,25 @@ module.exports = {
 
             const username = user.username;
 
-            const rows = await client.googleSheets.values.get({
+            // Validar que el tipo sea válido (SEED o CUTTING)
+            if (type !== "Semilla" && type !== "Esqueje") {
+                return interaction.reply("El tipo debe ser 'Semilla' o 'Esqueje'.");
+            }
+            const harvestYearString = harvestYear ? harvestYear.toString() : "";
+            let valuesToAppend = [username, type, seed, variety, scientificName, harvestYearString, location, observations, imageUrl];
+
+            await client.googleSheets.values.append({
                 auth: client.auth,
                 spreadsheetId: client.sheetId,
-                range: "Sheet1!A:A"
+                range: "Sheet1!A:H", // Ajustar el rango para incluir los nuevos campos
+                valueInputOption: "USER_ENTERED",
+                resource: {
+                    values: [valuesToAppend]
+                }
             });
 
-            const data = rows.data.values.find(row => row[0] === username);
+            return interaction.reply("¡La entrada ha sido añadida al banco de semillas correctamente!");
 
-            if (data) {
-                return interaction.reply("¡El usuario ya ha sido añadido a la lista!");
-            } else {
-                let valuesToAppend = [username, seed, variety, scientificName, harvestYear.toString(), location, observations, imageUrl];
-
-                await client.googleSheets.values.append({
-                    auth: client.auth,
-                    spreadsheetId: client.sheetId,
-                    range: "Sheet1!A:H", // Ajustar el rango para incluir los nuevos campos
-                    valueInputOption: "USER_ENTERED",
-                    resource: {
-                        values: [valuesToAppend]
-                    }
-                });
-
-                return interaction.reply("¡La entrada ha sido añadida al banco de semillas correctamente!");
-            }
         } catch (error) {
             console.error("Error al añadir entrada:", error);
             return interaction.reply("Hubo un error al añadir la entrada. Por favor, intenta de nuevo más tarde.");
