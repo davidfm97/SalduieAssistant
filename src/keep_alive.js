@@ -39,6 +39,10 @@ const guiaContent = `
     <h1>Salduie Assistant BOT</h1>
     <h2>Banco de semillas en Discord</h2>
 
+    <p>
+        Este bot de Discord permite gestionar un banco de semillas en una hoja de cálculo de Google Sheets. Los usuarios pueden añadir semillas y listar las semillas existentes con diversas opciones de filtrado.
+    </p>
+
     <h3>Comandos</h3>
 
     <h4>/add</h4>
@@ -49,17 +53,18 @@ const guiaContent = `
     <h4>Parámetros</h4>
     <ul>
         <li><code>user</code> (Usuario, requerido): El usuario que añade la semilla.</li>
+        <li><code>type</code> (Tipo, requerido): Tipo de entrada (semilla o esqueje).</li>
+        <li><code>location</code> (Lugar de recolección, requerido): El lugar de recolección.</li>
         <li><code>seed</code> (Semilla, requerido): La semilla a añadir.</li>
         <li><code>variety</code> (Variedad, requerido): La variedad de la semilla.</li>
         <li><code>scientific_name</code> (Nombre científico, requerido): El nombre científico de la planta.</li>
         <li><code>harvest_year</code> (Año de recolección, requerido): El año de recolección.</li>
-        <li><code>location</code> (Lugar de recolección, opcional): El lugar de recolección.</li>
         <li><code>observations</code> (Observaciones, opcional): Observaciones adicionales.</li>
         <li><code>image_url</code> (URL de la imagen, opcional): URL de la imagen de la planta.</li>
     </ul>
 
     <h4>Ejemplo de Uso</h4>
-    <pre>/add user: @Usuario seed: Tomate variety: Cherry scientific_name: Solanum lycopersicum harvest_year: 2023 location: Mi Jardín observations: Muy dulce image_url: https://example.com/image.jpg</pre>
+    <pre>/add user: @Usuario type: Semilla location: España seed: Tomate variety: Cherry scientific_name: Solanum lycopersicum harvest_year: 2023 observations: Muy dulce image_url: https://example.com/image.jpg</pre>
 
     <h4>/list</h4>
     <p>
@@ -83,6 +88,7 @@ const guiaContent = `
     <table>
         <tr>
             <th>Usuario</th>
+            <th>Tipo</th>
             <th>Semilla</th>
             <th>Variedad</th>
             <th>Nombre científico</th>
@@ -93,21 +99,23 @@ const guiaContent = `
         </tr>
         <tr>
             <td>usuario1</td>
+            <td>Semilla</td>
             <td>Pimientos</td>
             <td>-</td>
             <td>Capsicum annuum</td>
             <td>2023</td>
-            <td></td>
+            <td>España</td>
             <td>Variante dulce</td>
             <td></td>
         </tr>
         <tr>
             <td>usuario2</td>
+            <td>Esqueje</td>
             <td>Tomate</td>
             <td>Cherry Pera Amarillo</td>
             <td>Solanum lycopersicum</td>
             <td>2024</td>
-            <td></td>
+            <td>España</td>
             <td></td>
             <td><img src="https://cdn.discordapp.com/attachments/.../5.tomateCherryPeraAmarillo.jpg" alt="Tomate Cherry Pera Amarillo"></td>
         </tr>
