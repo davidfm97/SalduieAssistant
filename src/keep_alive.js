@@ -3,7 +3,7 @@ var fs = require('fs');
 
 http.createServer(function (req, res) {
   // Lee el contenido del archivo README.md
-  fs.readFile('README.md', 'utf8', function(err, data) {
+  fs.readFile('../README.md', 'utf8', function(err, data) {
     if (err) {
       console.error("Error al leer el archivo README.md:", err);
       res.writeHead(500, {'Content-Type': 'text/html'});
@@ -12,7 +12,7 @@ http.createServer(function (req, res) {
     }
 
     // Envía el contenido del README.md como respuesta
-    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(data);
     res.end();
   });
