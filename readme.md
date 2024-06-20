@@ -1,5 +1,5 @@
 # Salduie Assistant BOT
-##  Banco de semillas en discord
+## Banco de semillas en Discord
 
 Este bot de Discord permite gestionar un banco de semillas en una hoja de cálculo de Google Sheets. Los usuarios pueden añadir semillas y listar las semillas existentes con diversas opciones de filtrado.
 
@@ -12,16 +12,17 @@ Añade una entrada al banco de semillas.
 #### Parámetros
 
 - `user` (Usuario, requerido): El usuario que añade la semilla.
+- `type` (Tipo, requerido): Tipo de entrada (semilla o esqueje).
+- `location` (Lugar de recolección, requerido): El lugar de recolección.
 - `seed` (Semilla, requerido): La semilla a añadir.
 - `variety` (Variedad, requerido): La variedad de la semilla.
 - `scientific_name` (Nombre científico, requerido): El nombre científico de la planta.
 - `harvest_year` (Año de recolección, requerido): El año de recolección.
-- `location` (Lugar de recolección, opcional): El lugar de recolección.
 - `observations` (Observaciones, opcional): Observaciones adicionales.
 - `image_url` (URL de la imagen, opcional): URL de la imagen de la planta.
 
 #### Ejemplo de Uso
-/add user: @Usuario seed: Tomate variety: Cherry scientific_name: Solanum lycopersicum harvest_year: 2023 location: Mi Jardín observations: Muy dulce image_url: https://example.com/image.jpg
+/add user: @Usuario type: Semilla location: España seed: Tomate variety: Cherry scientific_name: Solanum lycopersicum harvest_year: 2023 observations: Muy dulce image_url: https://example.com/image.jpg
 
 ### `/list`
 
@@ -38,10 +39,10 @@ Muestra todos los usuarios agregados a la lista de semillas con opción de filtr
 
 A continuación, se muestra un ejemplo de cómo se estructuran los datos en la hoja de cálculo de Google Sheets:
 
-| Usuario            | Semilla   | Variedad              | Nombre científico       | Año de recolección | Lugar de recolección | Observaciones | Imágenes                                                                 |
-|--------------------|-----------|-----------------------|-------------------------|--------------------|----------------------|---------------|-------------------------------------------------------------------------|
-| usuario1           | Pimientos | -                     | Capsicum annuum         | 2023               |                      | Variante dulce |                                                                         |
-| usuario2           | Tomate    | Cherry Pera Amarillo  | Solanum lycopersicum    | 2024               |                      |               | https://cdn.discordapp.com/attachments/.../5.tomateCherryPeraAmarillo.jpg |
+| Usuario            | Tipo    | Semilla   | Variedad              | Nombre científico       | Año de recolección | Lugar de recolección | Observaciones | Imágenes                                                                 |
+|--------------------|---------|-----------|-----------------------|-------------------------|--------------------|----------------------|---------------|-------------------------------------------------------------------------|
+| usuario1           | Semilla | Pimientos | -                     | Capsicum annuum         | 2023               |   España              | Variante dulce |                                                                         |
+| usuario2           | Esqueje | Tomate    | Cherry Pera Amarillo  | Solanum lycopersicum    | 2024               |    España             |               | https://cdn.discordapp.com/attachments/.../5.tomateCherryPeraAmarillo.jpg |
 
 ## Notas Adicionales
 
@@ -60,4 +61,3 @@ Para cualquier duda o soporte técnico, contacta con ecohuertosalduie dentro del
 ---
 
 ¡Gracias por usar nuestro bot!
-
