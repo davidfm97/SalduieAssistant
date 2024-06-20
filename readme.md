@@ -13,16 +13,16 @@ Añade una entrada al banco de semillas.
 
 - `user` (Usuario, requerido): El usuario que añade la semilla.
 - `type` (Tipo, requerido): Tipo de entrada (semilla o esqueje).
+- `location` (Lugar de recolección, requerido): El lugar de recolección.
 - `seed` (Semilla, requerido): La semilla a añadir.
 - `variety` (Variedad, requerido): La variedad de la semilla.
 - `scientific_name` (Nombre científico, requerido): El nombre científico de la planta.
 - `harvest_year` (Año de recolección, requerido): El año de recolección.
-- `location` (Lugar de recolección, opcional): El lugar de recolección.
 - `observations` (Observaciones, opcional): Observaciones adicionales.
 - `image_url` (URL de la imagen, opcional): URL de la imagen de la planta.
 
 #### Ejemplo de Uso
-/add user: @Usuario type: Semilla seed: Tomate variety: Cherry scientific_name: Solanum lycopersicum harvest_year: 2023 location: Mi Jardín observations: Muy dulce image_url: https://example.com/image.jpg
+/add user: @Usuario type: Semilla location: España seed: Tomate variety: Cherry scientific_name: Solanum lycopersicum harvest_year: 2023 observations: Muy dulce image_url: https://example.com/image.jpg
 
 ### `/list`
 
@@ -41,8 +41,8 @@ A continuación, se muestra un ejemplo de cómo se estructuran los datos en la h
 
 | Usuario            | Tipo    | Semilla   | Variedad              | Nombre científico       | Año de recolección | Lugar de recolección | Observaciones | Imágenes                                                                 |
 |--------------------|---------|-----------|-----------------------|-------------------------|--------------------|----------------------|---------------|-------------------------------------------------------------------------|
-| usuario1           | Semilla | Pimientos | -                     | Capsicum annuum         | 2023               |                      | Variante dulce |                                                                         |
-| usuario2           | Esqueje | Tomate    | Cherry Pera Amarillo  | Solanum lycopersicum    | 2024               |                      |               | https://cdn.discordapp.com/attachments/.../5.tomateCherryPeraAmarillo.jpg |
+| usuario1           | Semilla | Pimientos | -                     | Capsicum annuum         | 2023               |   España              | Variante dulce |                                                                         |
+| usuario2           | Esqueje | Tomate    | Cherry Pera Amarillo  | Solanum lycopersicum    | 2024               |    España             |               | https://cdn.discordapp.com/attachments/.../5.tomateCherryPeraAmarillo.jpg |
 
 ## Notas Adicionales
 
