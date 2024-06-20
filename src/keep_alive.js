@@ -3,9 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const server = http.createServer(function (req, res) {
-  // Construye la ruta completa al archivo guia.md usando path.join()
-  const filePath = path.join(__dirname, 'src', 'guia.md');
-
+  // Construye la ruta completa al archivo guia.md usando __dirname
+ const filePath='/opt/render/project/src/guia.md'
   // Lee el contenido del archivo guia.md
   fs.readFile(filePath, 'utf8', function(err, data) {
     if (err) {
