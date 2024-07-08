@@ -26,15 +26,13 @@ const keep_alive = require('./keep_alive.js')
 const client = new Client({
 	allowedMentions: { parse: ["users", "roles"] },
 	intents: [
-	  Intents.FLAGS.GUILDS,
-	  Intents.FLAGS.GUILD_MESSAGES,
-	  Intents.FLAGS.GUILD_MEMBERS,
-	  Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-	  Intents.FLAGS.GUILD_WEBHOOKS,
-	  Intents.FLAGS.GUILD_VOICE_STATES,
-	  Intents.FLAGS.GUILD_INVITES,
-	  Intents.FLAGS.GUILD_BANS,
-	  Intents.FLAGS.GUILD_PRESENCES,
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+		Intents.FLAGS.GUILD_WEBHOOKS,
+		Intents.FLAGS.GUILD_VOICE_STATES,
+		Intents.FLAGS.GUILD_INVITES,
+		Intents.FLAGS.GUILD_BANS,
 	],
 });
 // Google Sheets Authorisation Stuff
